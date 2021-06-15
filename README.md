@@ -1,5 +1,5 @@
 - 👋 Hi, I’m @momoladebrouill
-- 👀 I’m interested in gaming and simulations
+- 👀 I’m interested in AI and simulations
 - 🌱 I’m currently learning python and C
 
 <!---
