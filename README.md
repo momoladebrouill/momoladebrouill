@@ -1,8 +1,4 @@
-🐱‍👤 Un jeune pyhton dev qui apprend en cours de route
-🐱‍🏍 Vous pouvez retrouver mes jeux en déroute
-😎 Sur mon profil scratch @momoladebrouill 
-🤠 J'aime utiliser pygame et Tkinter, pour un affichage sans douille
-🤩 Bon courage pour lire mes programmes aussi bons que les citrouilles
+Bonum sonum laedificat cor hominis
 
 
 <!---
