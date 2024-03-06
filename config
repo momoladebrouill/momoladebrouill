@@ -8,7 +8,7 @@ set $mod Mod4
 #workspace_layout tiling
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-default_border pixel 1
+default_border pixel 5
 default_floating_border normal
 
 # Hide borders
@@ -30,37 +30,26 @@ floating_modifier $mod
 bindsym $mod+Return exec alacritty
 
 # start a navigateur 
-bindsym $mod+Tab exec firefox
+bindsym $mod+Tab exec qutebrowser
 
 # kill focused window
 bindsym $mod+Shift+a kill
-
+bindsym $mod+Shift+q exec "notify-send 'adios mio'&& sleep 1 && shutdown now"
 # start program launcher
 bindsym $mod+d exec --no-startup-id dmenu_run -sb '#ff4871'
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
 
-################################################################################################
-## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
-################################################################################################
-
-exec --no-startup-id volumeicon
-bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
-#exec --no-startup-id pulseaudio
-#exec --no-startup-id pa-applet
-#bindsym $mod+Ctrl+m exec pavucontrol
-
-################################################################################################
 
 # Screen brightness controls
-# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+bindsym XF86MonBrightnessUp exec "brightnessctl s 10+; notify-send 'brightness up'"
+bindsym XF86MonBrightnessDown exec "brightnessctl s 10-; notify-send 'brightness down'"
 
 # Volume controls
-#bindsym XF86AudioRaiseVolume exec  "amixer -q sset Master,0 1+ unmute"
-#bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 1- unmute"
-#bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
+bindsym XF86AudioRaiseVolume exec  "amixer -q sset Master,0 1+ unmute; notify-send 'plus fort'"
+bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 1- unmute; notify-send 'moins fort'"
+bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle; notify-send 'chut'"
 
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
@@ -73,10 +62,6 @@ bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill picom
 bindsym $mod+Ctrl+t exec --no-startup-id picom -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
-bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 # focus_follows_mouse no
@@ -85,7 +70,7 @@ bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+m focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -98,7 +83,7 @@ bindsym $mod+Shift+j move left
 
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+m move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -151,14 +136,14 @@ bindsym $mod+Ctrl+Left workspace prev
 # to display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
-set $ws1 1:pee
-set $ws2 2:stored
-set $ws3 3:in_the_balls
-set $ws4 4
-set $ws5 5
-set $ws6 6
-set $ws7 7
-set $ws8 8
+set $ws1 1 Lupercule
+set $ws2 2 Vazogo
+set $ws3 3 Cougilis
+set $ws4 4 Bizeno
+set $ws5 5 Tiposac
+set $ws6 6 Rascotof
+set $ws7 7 Efertif
+set $ws8 8 Pilcatus
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -238,16 +223,17 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Set shut down, restart and locking features
+exec alias i3exit=$HOME/.config/i3/i3exit
 bindsym $mod+0 mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym s exec --no-startup-id i3exit suspend, mode "default"
-    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+    bindsym l exec --no-startup-id $HOME/.config/i3/i3exit lock, mode "default"
+    bindsym s exec --no-startup-id $HOME/.config/i3/i3exit suspend, mode "default"
+    bindsym u exec --no-startup-id $HOME/.config/i3/i3exit switch_user, mode "default"
+    bindsym e exec --no-startup-id $HOME/.config/i3/i3exit logout, mode "default"
+    bindsym h exec --no-startup-id $HOME/.config/i3/i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id $HOME/.config/i3/i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id $HOME/.config/i3/i3exit shutdown, mode "default"
 
     # exit system mode: "Enter" or "Escape"
     bindsym Return mode "default"
@@ -262,10 +248,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 5 px or 5 ppt
+        bindsym h resize shrink width 5 px or 5 ppt
         bindsym k resize grow height 5 px or 5 ppt
-        bindsym l resize shrink height 5 px or 5 ppt
-        bindsym semicolon resize grow width 5 px or 5 ppt
+        bindsym j resize shrink height 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -278,8 +264,6 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-# Lock screen
-bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -328,45 +312,44 @@ set_from_resource $term_color13    color13
 set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 
+
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
-bar {
-	i3bar_command i3bar
-	status_command i3status
-	position bottom
-
-## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-#	tray_output primary
-#	tray_output eDP1
-
-	bindsym button4 nop
-	bindsym button5 nop
-#   font xft:URWGothic-Book 11
-	strip_workspace_numbers yes
-
-    colors {
-        background #222D31
-        statusline #F9FAF9
-        separator  #454947
-
-#                      border  backgr. text
-        focused_workspace  #F9FAF9 #16a085 #292F34
-        active_workspace   #595B5B #353836 #FDF6E3
-        inactive_workspace #595B5B #222D31 #EEE8D5
-        binding_mode       #16a085 #2C2C2C #F9FAF9
-        urgent_workspace   #16a085 #FDF6E3 #E5201D
-    }
-}
-
-# hide/unhide i3status bar
-bindsym $mod+m bar mode toggle
+#bar {
+#	i3bar_command i3bar
+#	status_command i3status
+#	position bottom
+#
+### please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+##	tray_output primary
+##	tray_output eDP1
+#
+#	bindsym button4 nop
+#	bindsym button5 nop
+##   font xft:URWGothic-Book 11
+#	strip_workspace_numbers yes
+#
+#    colors {
+#        background #222D31
+#        statusline #F9FAF9
+#        separator  #454947
+#
+##                      border  backgr. text
+#        focused_workspace  #F9FAF9 #d12424 #292F34
+#        active_workspace   #595B5B #353836 #FDF6E3
+#        inactive_workspace #595B5B #222D31 #EEE8D5
+#        binding_mode       #d12424 #2C2C2C #F9FAF9
+#        urgent_workspace   #d12424 #FDF6E3 #E5201D
+#    }
+#}
+#
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
-  client.focused          #556064 #556064 #80FFF9 #FDF6E3
-  client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
-  client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
-  client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
-  client.placeholder      #000000 #0c0c0c #ffffff #000000 
+  client.focused          #000000 #151511 #ff3a47 #ff3a47
+  client.focused_inactive #2F3D44 #2F3D44 #f03a47 #454948
+  client.unfocused        #2F3D44 #2F3D44 #f03a47 #454948
+  client.urgent           #CB4B16 #FDF6E3 #f03a47 #268BD2
+  client.placeholder      #000000 #0c0c0c #ff0000 #000000 
 
   client.background       #2B2C2B
 
@@ -426,8 +409,22 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 # Le rayou :
-bindsym $mod+p exec --no-startup-id "feh --bg-center --randomize ~/baqueground/*";exec notify-send "haan"
-bindsym $mod+g exec --no-startup-id "feh --bg-tile ~/black_pixel.jpg"
-exec --no-startup-id feh --bg-center --randomize ~/baqueground/*
-exec notify-send "Bienvenue Jenifer"
+bindsym $mod+p exec --no-startup-id "feh --bg-fill --randomize ~/baqueground/*";exec notify-send "haan"
+bindsym $mod+Shift+p exec --no-startup-id "feh --bg-scale ~/Images/windows.jpg";exec notify-send "mode prof activé"
+bindsym $mod+o exec --no-startup-id gnome-terminal -e "btop"
 
+## Screenshots
+bindsym Print exec --no-startup-id maim "/home/$USER/Images/$(date).png"
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
+bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
+
+## Clipboard Screenshots
+bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
+bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+exec --no-startup-id feh --bg-scale --randomize ~/baqueground/*
+exec notify-send "Bienvenue Jenifer"
+# transparence
+exec --no-startup-id picom -CGb 
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id polybar
