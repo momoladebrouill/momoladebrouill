@@ -156,7 +156,7 @@ c.editor.command = ['alacritty', '-e', 'vim', '{file}' ]
 
 # Characters used for hint strings.
 # Type: UniqueCharString
-c.hints.chars = 'qsdfghjkl'
+c.hints.chars = 'qsdfghjklmazertyuiopwxcvbn'
 
 # Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 # for a blank page.
@@ -201,6 +201,7 @@ c.url.start_pages = 'momoladebrouill.github.io'
 # key. Note that when a key is bound (via `bindings.default` or
 # `bindings.commands`), the mapping is ignored.
 # Type: Dict
+c.scrolling.smooth = True
 c.bindings.default["normal"]["J"] = "tab-prev"
 c.bindings.default["normal"]["K"] = "tab-next"
 c.bindings.key_mappings = {'<Ctrl+6>': '<Ctrl+^>', '<Ctrl+Enter>': '<Ctrl+Return>', '<Ctrl+i>': '<Tab>', '<Ctrl+j>': '<Return>', '<Ctrl+m>': '<Return>', '<Ctrl+[>': '<Escape>', '<Enter>': '<Return>', '<Shift+Enter>': '<Return>', '<Shift+Return>': '<Return>'}
